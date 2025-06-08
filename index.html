@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Labak's Digital Print - Professional printing services" />
+  <title>Labak's Digital Print | Professional Printing Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #9c27b0;
+      --primary-light: #d05ce3;
+      --primary-dark: #6a0080;
+      --accent: #ff9800;
+      --accent-light: #ffc947;
+      --accent-dark: #c66900;
+      --text-light: #ffffff;
+      --text-dark: #212121;
+      --gradient-1: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ffa06b 100%);
+      --gradient-3: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+      --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --border-radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: #111;
+      scroll-behavior: smooth;
+    }
+
+    /* Background Video */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .video-background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) contrast(1.1);
+    }
+
+    /* Fallback background for when video doesn't load */
+    .fallback-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-1);
+      z-index: -3;
+    }
+
+    /* Overlay with animated gradient */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        45deg,
+        rgba(76, 0, 130, 0.75),
+        rgba(156, 39, 176, 0.75),
+        rgba(233, 30, 99, 0.75),
+        rgba(255, 87, 34, 0.75)
+      );
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      z-index: -1;
+      backdrop-filter: blur(3px);
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+
+    /* Profile Section */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      transform: scale(0.9);
+      animation: scaleIn 1.2s forwards 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    }
+
+    @keyframes scaleIn {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .profile-image {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-image img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-lg), 0 0 20px rgba(156, 39, 176, 0.6);
+      transition: var(--transition);
+      filter: brightness(1.05);
+    }
+
+    .profile-image::after {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: -15px;
+      bottom: -15px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--accent),
+        var(--primary),
+        var(--accent-light),
+        var(--primary-light),
+        var(--accent)
+      );
+      z-index: -1;
+      animation: rotate 6s linear infinite;
+      box-shadow: 0 0 25px rgba(255, 152, 0, 0.5);
+    }
+
+    .profile-image:hover img {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-lg), 0 0 30px rgba(156, 39, 176, 0.8);
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .profile-title {
+      text-align: center;
+      opacity: 0; /* Initially hidden for animation */
+      transform: translateY(-50px); /* Initial position for animation */
+      transition: all 1s ease-out;
+    }
+
+    .profile-title h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(156, 39, 176, 0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .highlight {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 8px 18px;
+      border-radius: var(--border-radius);
+      display: inline-block;
+      margin: 8px 0;
+      box-shadow: var(--shadow-sm), 0 0 15px rgba(255, 152, 0, 0.3);
+      border-left: 4px solid var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .profile-title h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      opacity: 0.95;
+      margin-top: 1.2rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 18px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm), 0 0 10px rgba(156, 39, 176, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    /* Links Section */
+    .links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .freelancer-heading {
+      position: relative;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 1.5rem 0 1rem;
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md), 0 0 15px rgba(156, 39, 176, 0.4);
+      border-left: 4px solid var(--primary);
+      overflow: hidden;
+      animation: pulse 2s infinite;
+    }
+
+    /* Bubble animation for the freelancer heading */
+    .bubble {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(-50%, -50%) translateY(0) scale(1);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate(-50%, -50%) translateY(-100px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: var(--shadow-md), 0 0 15px rgba(156, 39, 176, 0.4);
+      }
+      50% {
+        box-shadow: var(--shadow-md), 0 0 25px rgba(156, 39, 176, 0.7);
+      }
+      100% {
+        box-shadow: var(--shadow-md), 0 0 15px rgba(156, 39, 176, 0.4);
+      }
+    }
+
+    .link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 18px 24px;
+      font-size: 1.15rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-light);
+      border-radius: var(--border-radius);
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+      border-left: 4px solid transparent;
+      letter-spacing: 0.5px;
+      
+      /* Initial state for animation */
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+
+    .link:nth-child(1) {
+      border-left-color: #ff6b6b;
+      background-image: linear-gradient(to right, rgba(255, 107, 107, 0.25), transparent);
+    }
+
+    .link:nth-child(2) {
+      border-left-color: #48dbfb;
+      background-image: linear-gradient(to right, rgba(72, 219, 251, 0.25), transparent);
+    }
+
+    .link:nth-child(4) {
+      border-left-color: #1dd1a1;
+      background-image: linear-gradient(to right, rgba(29, 209, 161, 0.25), transparent);
+    }
+
+    .link:nth-child(5) {
+      border-left-color: #feca57;
+      background-image: linear-gradient(to right, rgba(254, 202, 87, 0.25), transparent);
+    }
+
+    .link:nth-child(6) {
+      border-left-color: #ff9ff3;
+      background-image: linear-gradient(to right, rgba(255, 159, 243, 0.25), transparent);
+    }
+
+    .link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .link:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-lg), 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .link:hover::before {
+      transform: translateX(100%);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+      opacity: 0.8;
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: var(--border-radius);
+      backdrop-filter: blur(5px);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* Floating Scroll Animation */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .scroll-animate.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Bubble Text Animation */
+    .bubble-text {
+      display: inline-block;
+      position: relative;
+    }
+
+    .bubble-word {
+      display: inline-block;
+      margin-right: 0.4em; /* Add space between words */
+    }
+
+    .bubble-letter {
+      display: inline-block;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    @keyframes bubbleFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-3px); /* Reduced from -5px for subtler movement */
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .profile-title h1 {
+        font-size: 1.9rem;
+      }
+
+      .profile-image img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .freelancer-heading {
+        font-size: 1.3rem;
+      }
+
+      .link {
+        padding: 16px 18px;
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 15px;
+      }
+
+      .profile-title h1 {
+        font-size: 1.6rem;
+      }
+
+      .profile-title h2 {
+        font-size: 1.1rem;
+      }
+
+      .profile-image img {
+        width: 130px;
+        height: 130px;
+      }
+
+      .freelancer-heading {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fallback background if video fails to load -->
+  <div class="fallback-background"></div>
+
+  <!-- Video Background -->
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="https://v1.pinimg.com/videos/iht/720p/5f/e1/36/5fe13606be299536880640975a1389f1.mp4" type="video/mp4">
+      <!-- Fallback to image if video doesn't load -->
+    </video>
+  </div>
+
+  <!-- Animated Gradient Overlay -->
+  <div class="overlay"></div>
+
+ <main class="container">
+    <!-- Profile Section -->
+    <section class="profile">
+      <div class="profile-image">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVlRw8iHpUrwI8bpTXw-zhDY0MhsewMGnXVm4tQRoLiSwWAzOnT7Uqy8EUedoTdNScurmmkbME063V3wMr6UtuYdVWDxngY_eTNNLE8ydEUeJYTOoUMAr6FZr7JGLxU4pnimPYPxMJILUJHR5oaW0wo9PPJvEH-w3gkc-JyXOK6erQeSHGPFa8S9Y7J5kz/s1024/WhatsApp%20Image%202025-05-31%20at%2012.40.23_11ad2553.jpg">
+      </div>
+      <div class="profile-title">
+        <h1>Welcome to <br> <span class="highlight">Daniel Service & Center</span></h1>
+        <h2>Get your quality printing service</h2>
+      </div>
+    </section>
+
+    <!-- Links Section -->
+    <section class="links-container">
+      <a href="https://daniel5676.github.io/LANDINGPAGE/" class="link scroll-animate" aria-label="Hire a Graphic Designer">
+        <h2><span class="bubble-text">Print Your large Banners</span></h2>
+      </a>
+      <a href="https://daniel5676.github.io/LANDINGPAGE/" class="link scroll-animate" aria-label="Print Your Banners">
+        <h2><span class="bubble-text">Join our tech academy</span></h2>
+      </a>
+
+      <h2 class="freelancer-heading scroll-animate" id="freelancer-heading">Get a Professional Freelancer</h2>
+      <a href="https://daniel5676.github.io/freelancer/" class="link scroll-animate" aria-label="Hire a Professional web developer">
+        <h2><span class="bubble-text">Hire a Web Developer</span></h2>
+      </a>
+      <a href="https://daniel5676.github.io/freelancer/" class="link scroll-animate" aria-label="Print Your (D.I) Jobs">
+        <h2> <span class="bubble-text">Hire a Graphic Designer</span> </h2>
+      </a>
+      <a href="#" class="link scroll-animate" aria-label="Contact Us Directly">
+        <span class="bubble-text">Contact Us Directly</span>
+      </a>
+    </section>
+
+   <!-- Footer -->
+    <footer class="footer">
+      <p>© 2025 Labak's Digital Print. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Animation JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait 1.5 seconds after page load (reduced from 2s for better UX)
+      setTimeout(function() {
+        // Animate profile title
+        const profileTitle = document.querySelector('.profile-title');
+        profileTitle.style.opacity = '1';
+        profileTitle.style.transform = 'translateY(0)';
+        
+        // Get all links
+        const links = document.querySelectorAll('.link');
+        
+        // Directions for animations
+        const directions = ['left', 'right', 'bottom', 'top'];
+        
+        // Animate each link with a slight delay between them
+        links.forEach((link, index) => {
+          // Set initial position based on direction
+          const direction = directions[index % directions.length];
+          
+          // Set initial transform based on direction
+          switch(direction) {
+            case 'top':
+              link.style.transform = 'translateY(-100px)';
+              break;
+            case 'right':
+              link.style.transform = 'translateX(100px)';
+              break;
+            case 'bottom':
+              link.style.transform = 'translateY(100px)';
+              break;
+            case 'left':
+              link.style.transform = 'translateX(-100px)';
+              break;
+          }
+          
+          // Add a small delay for each link to create a staggered effect
+          setTimeout(() => {
+            link.style.opacity = '1';
+            link.style.transform = 'translate(0, 0)';
+          }, index * 150); // 150ms delay between each link (reduced from 200ms)
+        });
+
+        // Create bubble animation for the freelancer heading
+        const freelancerHeading = document.getElementById('freelancer-heading');
+        
+        // Function to create a bubble
+        function createBubble() {
+          const bubble = document.createElement('div');
+          bubble.classList.add('bubble');
+          
+          // Random size between 10px and 30px
+          const size = Math.random() * 20 + 10;
+          bubble.style.width = `${size}px`;
+          bubble.style.height = `${size}px`;
+          
+          // Random position along the width of the heading
+          const posX = Math.random() * 100;
+          // Position at the bottom of the heading
+          const posY = 100;
+          
+          bubble.style.left = `${posX}%`;
+          bubble.style.top = `${posY}%`;
+          
+          // Set animation duration between 2-4 seconds
+          const animDuration = Math.random() * 2 + 2;
+          bubble.style.animation = `float ${animDuration}s ease-in-out`;
+          
+          // Append bubble to heading
+          freelancerHeading.appendChild(bubble);
+          
+          // Remove bubble after animation completes
+          setTimeout(() => {
+            bubble.remove();
+          }, animDuration * 1000);
+        }
+        
+        // Create bubbles at random intervals
+        setInterval(createBubble, 300);
+        
+        // Create initial set of bubbles
+        for (let i = 0; i < 5; i++) {
+          setTimeout(createBubble, i * 300);
+        }
+        
+      }, 1500); // 1.5 seconds delay after page load
+      
+      // Add hover effect to profile image
+      const profileImage = document.querySelector('.profile-image img');
+      profileImage.addEventListener('mouseover', function() {
+        this.style.transform = 'scale(1.05) rotate(5deg)';
+      });
+      
+      profileImage.addEventListener('mouseout', function() {
+        this.style.transform = 'scale(1) rotate(0deg)';
+      });
+
+      // ===== FLOATING SCROLL ANIMATION =====
+      // Using Intersection Observer for better performance
+      const scrollElements = document.querySelectorAll('.scroll-animate');
+      
+      const elementInView = (el, dividend = 1) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+          elementTop <= 
+          (window.innerHeight || document.documentElement.clientHeight) / dividend
+        );
+      };
+      
+      const displayScrollElement = (element) => {
+        element.classList.add('active');
+      };
+      
+      const hideScrollElement = (element) => {
+        element.classList.remove('active');
+      };
+      
+      const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+          if (elementInView(el, 1.25)) {
+            displayScrollElement(el);
+          } else {
+            hideScrollElement(el);
+          }
+        });
+      };
+      
+      // Initialize scroll animation
+      window.addEventListener('scroll', () => {
+        handleScrollAnimation();
+      });
+      
+      // Trigger once on load
+      handleScrollAnimation();
+      
+      // ===== BUBBLE TEXT ANIMATION =====
+      // Split text into words and characters for bubble animation with proper spacing
+      const bubbleTextElements = document.querySelectorAll('.bubble-text');
+      
+      bubbleTextElements.forEach(element => {
+        const text = element.textContent;
+        element.textContent = '';
+        
+        // Split text into words
+        const words = text.split(' ');
+        
+        // Process each word
+        words.forEach((word, wordIndex) => {
+          const wordSpan = document.createElement('span');
+          wordSpan.classList.add('bubble-word');
+          
+          // Create spans for each character in the word
+          for (let i = 0; i < word.length; i++) {
+            const charSpan = document.createElement('span');
+            charSpan.classList.add('bubble-letter');
+            charSpan.textContent = word[i];
+            
+            // Set random animation delay for each character (slower)
+            const delay = Math.random() * 3 + 1; // Increased delay (1-4s)
+            const duration = 3 + Math.random() * 2; // Increased duration (3-5s)
+            
+            // Apply slower animation
+            charSpan.style.animation = `bubbleFloat ${duration}s ease-in-out ${delay}s infinite`;
+            
+            wordSpan.appendChild(charSpan);
+          }
+          
+          element.appendChild(wordSpan);
+          
+          // Add a space after each word except the last one
+          if (wordIndex < words.length - 1) {
+            const space = document.createTextNode(' ');
+            element.appendChild(space);
+          }
+        });
+      });
+      
+      // Add floating effect on scroll
+      let lastScrollTop = 0;
+      let ticking = false;
+      
+      window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            const scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
+            const scrollDiff = Math.abs(scrollTop - lastScrollTop);
+            const scrollFactor = Math.min(scrollDiff / 50, 1); // Limit the effect
+            
+            // Apply floating effect to elements based on scroll direction and speed
+            document.querySelectorAll('.scroll-animate.active').forEach(element => {
+              const randomOffset = (Math.random() - 0.5) * 3 * scrollFactor; // Reduced from 5 to 3
+              const verticalOffset = scrollDirection === 'down' ? 
+                -3 * scrollFactor : 3 * scrollFactor; // Reduced from 5 to 3
+              
+              element.style.transform = `translate(${randomOffset}px, ${verticalOffset}px)`;
+              
+              // Reset transform after a short delay for smooth effect
+              setTimeout(() => {
+                element.style.transform = 'translate(0, 0)';
+              }, 500); // Increased from 300 to 500 for slower movement
+            });
+            
+            lastScrollTop = scrollTop;
+            ticking = false;
+          });
+          
+          ticking = true;
+        }
+      }, { passive: true });
+    });
+  </script>
+</body>
+</html>
