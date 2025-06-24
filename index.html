@@ -100,6 +100,17 @@
       backdrop-filter: blur(5px);
       z-index: 1000;
       padding: 1rem 0;
+      cursor: pointer; /* Indicates clickable area */
+    }
+
+    .header-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header-link:hover ul li {
+      color: var(--accent-light);
     }
 
     nav ul {
@@ -109,15 +120,10 @@
       gap: 2rem;
     }
 
-    nav ul li a {
+    nav ul li {
       color: var(--text-light);
-      text-decoration: none;
       font-weight: 500;
       transition: var(--transition);
-    }
-
-    nav ul li a:hover {
-      color: var(--accent-light);
     }
 
     /* Profile Section */
@@ -171,7 +177,7 @@
       background: var(--accent);
       color: var(--text-light);
       text-decoration: none;
-      border-radius: var(--border-radius);
+      border-radius: 8px;
       font-weight: 600;
       box-shadow: var(--shadow-md);
       transition: var(--transition);
@@ -343,15 +349,15 @@
   <div class="overlay"></div>
 
   <!-- Header -->
-<header>
+  <header>
     <nav>
-        <a href="https://daniel5676.github.io/Bereko-service/s" class="header-link">
-            <ul>
-                <li>Our printing offer</li>
-            </ul>
-        </a>
+      <a href="https://daniel5676.github.io/berekoservises/" class="header-link" aria-label="Navigate to our printing services">
+        <ul>
+          <li>Print Services</li>
+        </ul>
+      </a>
     </nav>
-</header>
+  </header>
 
   <!-- Main Content -->
   <main class="container">
@@ -413,9 +419,12 @@
     // Smooth Scroll for Navigation
     document.querySelectorAll('nav a').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
-        e.preventDefault();
         const targetId = this.getAttribute('href');
-        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        if (targetId.startsWith('#')) {
+          e.preventDefault();
+          document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+        }
+        // Allow non-anchor links (like the header-link) to navigate normally
       });
     });
 
